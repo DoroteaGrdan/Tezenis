@@ -1,23 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import Die from './Die';
+import React, { useState } from 'react';
 
 function App() {
+  const [dice,setDice] = useState(getNewDice())
+  function getRandomNum(){
+    const randomNum = Math.floor(Math.random() * 6) + 1;
+    return randomNum;
+  }
+
+  function getNewDice(){
+    const arrayOfNumbers=[];
+    for(let i=0; i<10; i++){
+      arrayOfNumbers.push({
+        value:getRandomNum(), 
+        isHeld:false
+      })
+    }
+    return arrayOfNumbers;
+  }
+  function displayDie(){
+    return dice.map((die,index)=>{
+      return(
+        <Die value={die.value} key={index}/>
+      )
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Tenzies</h2>
+      <p>Roll a dice until you have all the same numbers.
+          To save the dice click on it!
+      </p>
+      <div id="dice">
+        {displayDie()}
+      </div>
+      <button id="rollBtn">Roll Again</button>
     </div>
   );
 }
