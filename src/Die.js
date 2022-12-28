@@ -8,7 +8,7 @@ export default function Die(props){
     }
 
     return(
-        <div id="die" className={`num${props.value}`}>
+        <div className={`die num${props.value} ${props.isHeld ? "isHeld" : ""}`} onClick={props.handleClick}>
         {makeSpan()}
         </div>
     )
